@@ -10,11 +10,11 @@ El gran crecimiento del sector de las tecnologías de la información ha hecho q
 Los patrones de diseño más utilizados se clasifican en tres categorías principales, cada patrón de diseño individual conforma un total de 23 patrones de diseño. Las cuatro categorías principales son:
 
 - Patrones creacionales
-  - Abstract Factory
-  - Builder Patterns
-  - Factory Method
+  - [Abstract Factory](https://github.com/mroncatto/design-patterns/tree/main/src/creational/abstract_factory_pattern)
+  - [Builder Patterns](https://github.com/mroncatto/design-patterns/tree/main/src/creational/builder_pattern)
+  - [Factory Method](https://github.com/mroncatto/design-patterns/tree/main/src/creational/factory_method_pattern)
   - Prototype
-  - Singleton
+  - [Singleton](https://github.com/mroncatto/design-patterns/tree/main/src/creational/singleton_pattern)
 - Patrones estructurales
   - Adapter
   - Bridge
