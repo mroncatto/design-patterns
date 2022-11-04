@@ -1,4 +1,4 @@
-package creational.singletonPattern;
+package creational.singleton_pattern;
 
 import java.util.Date;
 

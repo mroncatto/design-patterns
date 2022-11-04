@@ -1,9 +1,15 @@
-import creational.abstractFactoryPattern.*;
-import creational.factoryMethodPattern.Restaurante;
-import creational.factoryMethodPattern.Sandwich;
-import creational.factoryMethodPattern.RestauranteSandwichCarne;
-import creational.factoryMethodPattern.RestauranteSandwichVegano;
-import creational.singletonPattern.Reloj;
+import creational.abstract_factory_pattern.abstract_factory.Compania;
+import creational.abstract_factory_pattern.concrete_factory.FabricanteAirbus;
+import creational.abstract_factory_pattern.concrete_factory.FabricanteBoeing;
+import creational.abstract_factory_pattern.product.Avion;
+import creational.abstract_factory_pattern.product.Helicoptero;
+import creational.builder_pattern.Car;
+import creational.builder_pattern.CarBuilder;
+import creational.factory_method_pattern.creator.Restaurante;
+import creational.factory_method_pattern.product.Sandwich;
+import creational.factory_method_pattern.concrete_creator.RestauranteSandwichCarne;
+import creational.factory_method_pattern.concrete_creator.RestauranteSandwichVegano;
+import creational.singleton_pattern.Reloj;
 
 import java.util.Scanner;
 
@@ -14,6 +20,7 @@ public class Main {
         System.out.println("[1] - Singleton");
         System.out.println("[2] - Factory Method");
         System.out.println("[3] - Abstract Factory");
+        System.out.println("[4] - Builder");
         System.out.println("========================================================== ");
         System.out.print("Ingresa una opcion: ");
 
@@ -29,6 +36,9 @@ public class Main {
                 break;
             case 3:
                 abstractFactory();
+                break;
+            case 4:
+                builder();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -69,5 +79,27 @@ public class Main {
         Compania boeing = new FabricanteBoeing();
         Avion avionBoeing = boeing.crearAvion(" B747");
         Helicoptero helicopteroBoeing = boeing.crearHelicoptero("CH-47");
+    }
+
+    public static void builder() {
+        /**
+         * Creacion de objeto etapa por etapa de forma simples
+         */
+        Car car1 = new CarBuilder()
+                .color("Azul")
+                .marca("Toyota")
+                .modelo("Corola")
+                .puertas(4)
+                .build();
+
+        Car car2 = new CarBuilder()
+                .color("Rojo")
+                .marca("Lamborgini")
+                .modelo("Aventador")
+                .puertas(2)
+                .build();
+
+        System.out.println("El auto 1 es un " + car1.getMarca() + ", modelo " + car1.getModelo() + ", color " + car1.getColor());
+        System.out.println("El auto 2 es un " + car2.getMarca() + ", modelo " + car2.getModelo() + ", color " + car2.getColor());
     }
 }

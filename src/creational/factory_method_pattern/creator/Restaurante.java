@@ -1,4 +1,6 @@
-package creational.factoryMethodPattern;
+package creational.factory_method_pattern.creator;
+
+import creational.factory_method_pattern.product.Sandwich;
 
 public abstract class Restaurante {
 
