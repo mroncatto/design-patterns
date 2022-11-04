@@ -1,3 +1,4 @@
+import creational.abstractFactoryPattern.*;
 import creational.factoryMethodPattern.Restaurante;
 import creational.factoryMethodPattern.Sandwich;
 import creational.factoryMethodPattern.RestauranteSandwichCarne;
@@ -12,6 +13,7 @@ public class Main {
         System.out.println("======================= CREATIONAL ======================= ");
         System.out.println("[1] - Singleton");
         System.out.println("[2] - Factory Method");
+        System.out.println("[3] - Abstract Factory");
         System.out.println("========================================================== ");
         System.out.print("Ingresa una opcion: ");
 
@@ -24,6 +26,9 @@ public class Main {
                 break;
             case 2:
                 factoryMethod();
+                break;
+            case 3:
+                abstractFactory();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -41,13 +46,28 @@ public class Main {
 
     private static void factoryMethod(){
         /**
-         * Con el uso de la super clase estable una estructura Open-Closed
-         * quedando abierta para extender pero cerrada para modificar
+         * Un sistema de restaurante necesita procesar pedidos donde pueden optar por 2 tipos de sandwich
          */
         Restaurante restauranteCarne = new RestauranteSandwichCarne();
         Sandwich sandwichCarne = restauranteCarne.pedidoSandwich();
 
         Restaurante restauranteVegano = new RestauranteSandwichVegano();
         Sandwich sandwichVegano = restauranteVegano.pedidoSandwich();
+    }
+
+    public static void abstractFactory(){
+
+        /**
+         * Un sistema de industria necesita procesar fabricacion de diferentes tipos de avioes y helicopteros
+         * de diferentes tipos de companias que fabrican las aeronaves
+         */
+
+        Compania airbus = new FabricanteAirbus();
+        Avion avionAirbus = airbus.crearAvion("A380");
+        Helicoptero helicopteroAirbus = airbus.crearHelicoptero("H160");
+
+        Compania boeing = new FabricanteBoeing();
+        Avion avionBoeing = boeing.crearAvion(" B747");
+        Helicoptero helicopteroBoeing = boeing.crearHelicoptero("CH-47");
     }
 }
