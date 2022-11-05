@@ -1,3 +1,8 @@
+import behavioral.chain_of_responsability_pattern.*;
+import behavioral.chain_of_responsability_pattern.handlers.Handler;
+import behavioral.chain_of_responsability_pattern.handlers.RoleCheckHandler;
+import behavioral.chain_of_responsability_pattern.handlers.UserExistsHandler;
+import behavioral.chain_of_responsability_pattern.handlers.ValidPasswordHandler;
 import creational.abstract_factory_pattern.abstract_factory.Compania;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteAirbus;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteBoeing;
@@ -9,21 +14,29 @@ import creational.factory_method_pattern.creator.Restaurante;
 import creational.factory_method_pattern.product.Sandwich;
 import creational.factory_method_pattern.concrete_creator.RestauranteSandwichCarne;
 import creational.factory_method_pattern.concrete_creator.RestauranteSandwichVegano;
+import creational.prototype_pattern.Computadora;
+import creational.prototype_pattern.Electronico;
+import creational.prototype_pattern.ElectronicoCache;
+import creational.prototype_pattern.Tablet;
 import creational.singleton_pattern.Reloj;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("======================= CREATIONAL ======================= ");
+        System.out.println("======================= Patrones creacionales =========================== ");
         System.out.println("[1] - Singleton");
         System.out.println("[2] - Factory Method");
         System.out.println("[3] - Abstract Factory");
         System.out.println("[4] - Builder");
         System.out.println("[5] - Prototype");
-        System.out.println("========================================================== ");
-        System.out.print("Ingresa una opcion: ");
+        System.out.println("\n ======================= Patrones de comportamiento ======================= ");
+        System.out.println("[6] - Chain Of Responsability");
+        System.out.println("\n ========================================================================== ");
+        System.out.print("\n Ingresa una opcion: ");
 
         int read = scanner.nextInt();
         scanner.close();
@@ -43,6 +56,9 @@ public class Main {
                 break;
             case 5:
                 prototype();
+                break;
+            case 6:
+                chainOfResponsability();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -72,7 +88,7 @@ public class Main {
     public static void abstractFactory(){
 
         /**
-         * Un sistema de industria necesita procesar fabricacion de diferentes tipos de avioes y helicopteros
+         * Ejemplo: Un sistema de industria necesita procesar fabricacion de diferentes tipos de avioes y helicopteros
          * de diferentes tipos de companias que fabrican las aeronaves
          */
 
@@ -108,6 +124,38 @@ public class Main {
     }
 
     public static void prototype(){
-        System.out.println("No implementado!!");
+        /**
+         * Copia de objetos sin depender de la clase
+         */
+        List<Electronico> electronicos = List.of(
+                new Computadora("comp_marca", "comp_modelo", "comp_color", "comp_potencia"),
+                new Tablet("tablet_marca", "tablet_modelo", "tablet_color", "tablet_tela")
+        );
+
+        List<Electronico> copyList = new ArrayList<>();
+        for(Electronico electronico : electronicos){
+            copyList.add(electronico.clone());
+        }
+
+        copyList.forEach(System.out::println);
+        System.out.println("===========================");
+
+        ElectronicoCache registro = new ElectronicoCache();
+        registro.put(electronicos);
+        System.out.println(registro.get("comp_marca comp_modelo"));
+    }
+
+    public static void chainOfResponsability(){
+        /**
+         * Manejo de una lista de reglas para un login donde cada regla se concentra en un handler proprio
+         */
+        Database database = new Database();
+
+        Handler handler = new UserExistsHandler(database);
+        handler.setNextHandler(new ValidPasswordHandler(database))
+                .setNextHandler(new RoleCheckHandler());
+
+        AuthService service = new AuthService(handler);
+        service.logIn("admin", "admin_password");
     }
 }
