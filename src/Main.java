@@ -21,6 +21,7 @@ public class Main {
         System.out.println("[2] - Factory Method");
         System.out.println("[3] - Abstract Factory");
         System.out.println("[4] - Builder");
+        System.out.println("[5] - Prototype");
         System.out.println("========================================================== ");
         System.out.print("Ingresa una opcion: ");
 
@@ -39,6 +40,9 @@ public class Main {
                 break;
             case 4:
                 builder();
+                break;
+            case 5:
+                prototype();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -101,5 +105,9 @@ public class Main {
 
         System.out.println("El auto 1 es un " + car1.getMarca() + ", modelo " + car1.getModelo() + ", color " + car1.getColor());
         System.out.println("El auto 2 es un " + car2.getMarca() + ", modelo " + car2.getModelo() + ", color " + car2.getColor());
+    }
+
+    public static void prototype(){
+        System.out.println("No implementado!!");
     }
 }
