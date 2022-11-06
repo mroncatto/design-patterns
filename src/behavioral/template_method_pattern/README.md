@@ -1,0 +1,2 @@
+# <center> Template Method </center>
+- Se usa con componentes que tienen similitud donde se puede implementar una plantilla del código para probar ambos componentes. El código se puede cambiar con pequeñas modificaciones.

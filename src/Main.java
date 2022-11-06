@@ -7,6 +7,9 @@ import behavioral.command_pattern.commands.AbrirCerrarCortinaCommand;
 import behavioral.command_pattern.commands.AccionarLamparaCommand;
 import behavioral.command_pattern.components.invoker.Piso;
 import behavioral.command_pattern.components.invoker.Habitacion;
+import behavioral.template_method_pattern.BaseGameLoader;
+import behavioral.template_method_pattern.DiabloLoader;
+import behavioral.template_method_pattern.WorldOfWarcraftLoader;
 import creational.abstract_factory_pattern.abstract_factory.Compania;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteAirbus;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteBoeing;
@@ -40,6 +43,7 @@ public class Main {
         System.out.println("\n ======================= Patrones de comportamiento ======================= ");
         System.out.println("[6] - Chain Of Responsability");
         System.out.println("[7] - Command");
+        System.out.println("[8] - Template Method");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -67,6 +71,9 @@ public class Main {
                 break;
             case 7:
                 command();
+                break;
+            case 8:
+                templateMethod();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -183,5 +190,19 @@ public class Main {
         piso.executeCommand();
         System.out.println(piso.isLamparaAccionada());
 
+    }
+
+    public static void templateMethod(){
+        /**
+         * Mantiene una base de estructura para una serie de metodos individuales que se ejecutan en orden
+         * y pueden ser implementado manteniendo un orden evitando duplicar codigo
+         */
+        BaseGameLoader wowLoader = new WorldOfWarcraftLoader();
+        wowLoader.load();
+
+        System.out.println("====================================");
+
+        BaseGameLoader diabloLoader = new DiabloLoader();
+        diabloLoader.load();
     }
 }
