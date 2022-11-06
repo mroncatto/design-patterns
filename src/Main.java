@@ -3,6 +3,10 @@ import behavioral.chain_of_responsability_pattern.handlers.Handler;
 import behavioral.chain_of_responsability_pattern.handlers.RoleCheckHandler;
 import behavioral.chain_of_responsability_pattern.handlers.UserExistsHandler;
 import behavioral.chain_of_responsability_pattern.handlers.ValidPasswordHandler;
+import behavioral.command_pattern.commands.AbrirCerrarCortinaCommand;
+import behavioral.command_pattern.commands.AccionarLamparaCommand;
+import behavioral.command_pattern.components.invoker.Piso;
+import behavioral.command_pattern.components.invoker.Habitacion;
 import creational.abstract_factory_pattern.abstract_factory.Compania;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteAirbus;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteBoeing;
@@ -35,6 +39,7 @@ public class Main {
         System.out.println("[5] - Prototype");
         System.out.println("\n ======================= Patrones de comportamiento ======================= ");
         System.out.println("[6] - Chain Of Responsability");
+        System.out.println("[7] - Command");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -59,6 +64,9 @@ public class Main {
                 break;
             case 6:
                 chainOfResponsability();
+                break;
+            case 7:
+                command();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -157,5 +165,23 @@ public class Main {
 
         AuthService service = new AuthService(handler);
         service.logIn("admin", "admin_password");
+    }
+
+    public static void command(){
+        /**
+         * Ejecuta llamada de metodos en objetos standalone de forma escalable
+         */
+        Habitacion habitacion = new Habitacion();
+        habitacion.setCommand(new AbrirCerrarCortinaCommand(habitacion.getCortina()));
+        habitacion.executeCommand();
+        System.out.println(habitacion.cortinaAbierta());
+
+        System.out.println("==========================================");
+
+        Piso piso = new Piso();
+        piso.setCommand(new AccionarLamparaCommand(piso.getLampara()));
+        piso.executeCommand();
+        System.out.println(piso.isLamparaAccionada());
+
     }
 }
