@@ -7,6 +7,7 @@ import behavioral.command_pattern.commands.AbrirCerrarCortinaCommand;
 import behavioral.command_pattern.commands.AccionarLamparaCommand;
 import behavioral.command_pattern.components.invoker.Piso;
 import behavioral.command_pattern.components.invoker.Habitacion;
+import behavioral.mediator_pattern.Dialog;
 import behavioral.template_method_pattern.BaseGameLoader;
 import behavioral.template_method_pattern.DiabloLoader;
 import behavioral.template_method_pattern.WorldOfWarcraftLoader;
@@ -44,6 +45,7 @@ public class Main {
         System.out.println("[6] - Chain Of Responsability");
         System.out.println("[7] - Command");
         System.out.println("[8] - Template Method");
+        System.out.println("[9] - Mediator");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -74,6 +76,9 @@ public class Main {
                 break;
             case 8:
                 templateMethod();
+                break;
+            case 9:
+                mediator();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -204,5 +209,19 @@ public class Main {
 
         BaseGameLoader diabloLoader = new DiabloLoader();
         diabloLoader.load();
+    }
+
+    public static void mediator(){
+        /**
+         * Clases desacopladas con comunicacion indirecta utilizando un mediador
+         * que permite reutilizar un componente en un app diferente
+         */
+        Dialog dialog = new Dialog();
+        dialog.enterUsername("Geekific");
+        dialog.enterPassword("LikeAndSubscribe");
+
+        dialog.simulateLoginClicked();
+
+        dialog.simulateForgotPassClicked();
     }
 }
