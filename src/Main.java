@@ -8,6 +8,7 @@ import behavioral.command_pattern.commands.AccionarLamparaCommand;
 import behavioral.command_pattern.components.invoker.Piso;
 import behavioral.command_pattern.components.invoker.Habitacion;
 import behavioral.mediator_pattern.Dialog;
+import behavioral.memento_pattern.Editor;
 import behavioral.template_method_pattern.BaseGameLoader;
 import behavioral.template_method_pattern.DiabloLoader;
 import behavioral.template_method_pattern.WorldOfWarcraftLoader;
@@ -46,6 +47,7 @@ public class Main {
         System.out.println("[7] - Command");
         System.out.println("[8] - Template Method");
         System.out.println("[9] - Mediator");
+        System.out.println("[10] - Memento");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -79,6 +81,9 @@ public class Main {
                 break;
             case 9:
                 mediator();
+                break;
+            case 10:
+                memento();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -223,5 +228,27 @@ public class Main {
         dialog.simulateLoginClicked();
 
         dialog.simulateForgotPassClicked();
+    }
+
+    public static void memento(){
+        /**
+         * Salvar y restaurar el estado de un objeto sin revelar detalles de implementacion
+         * Delegar a criacao de copia de estado do objeto para o proprio objeto
+         */
+        Editor editor = new Editor();
+        editor.escribir("Like");
+        editor.imprimirTexto();
+        editor.escribir("Like and");
+        editor.imprimirTexto();
+        editor.escribir("Like and Subscribe");
+        editor.imprimirTexto();
+        editor.escribir("Like and Subscribe to Java!");
+        editor.imprimirTexto();
+        editor.deshacer();
+        editor.imprimirTexto();
+        editor.deshacer();
+        editor.imprimirTexto();
+        editor.deshacer();
+        editor.imprimirTexto();
     }
 }
