@@ -1,0 +1,2 @@
+# <center> Composite </center>
+- Se usa para agrupar objetos como un solo objeto. Permite componer objetos en estructuras de árbol y luego trabajar con estas estructuras como si fueran objetos individuales

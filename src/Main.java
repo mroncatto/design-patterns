@@ -49,6 +49,10 @@ import structural.bridge_pattern.abstractions.PizzeriaAmericana;
 import structural.bridge_pattern.abstractions.PizzeriaItaliana;
 import structural.bridge_pattern.implementations.PizzaPepperoni;
 import structural.bridge_pattern.implementations.PizzaVegana;
+import structural.composite_pattern.ComporCaja;
+import structural.composite_pattern.products.EntregaService;
+import structural.composite_pattern.products.Libro;
+import structural.composite_pattern.products.VideoGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +80,7 @@ public class Main {
         System.out.println("[15] - Visitor");
         System.out.println("[16] - Adapter");
         System.out.println("[17] - Bridge");
+        System.out.println("[18] - Composite");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -133,6 +138,9 @@ public class Main {
                 break;
             case 17:
                 bridge();
+                break;
+            case 18:
+                composite();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -431,5 +439,29 @@ public class Main {
 
         Pizzeria pizzeriaItaliana = new PizzeriaItaliana(new PizzaVegana());
         pizzeriaItaliana.deliver();
+    }
+
+    public static void composite() {
+        /**
+         * - Ayuda crear estructuras arboles de objetos con simples y complejos objetos
+         * - Todos los elementos comparten una interface comun permitiendo el cliente tratar de forma
+         * individual los objetos y composiciones uniformes
+         */
+        EntregaService entregaService = new EntregaService();
+        entregaService.configurarPedido(
+                new ComporCaja(
+                        new VideoGame("PS5", 500)
+                ),
+                new ComporCaja(
+                        new ComporCaja(
+                                new Libro("Clean Code", 200),
+                                new Libro("SOLID", 300)
+                        ),
+                        new VideoGame("XBOX", 450),
+                        new VideoGame("Nintendo", 420)
+                )
+        );
+
+        System.out.println(entregaService.calcularPrecioPedido());
     }
 }
