@@ -53,6 +53,10 @@ import structural.composite_pattern.ComporCaja;
 import structural.composite_pattern.products.EntregaService;
 import structural.composite_pattern.products.Libro;
 import structural.composite_pattern.products.VideoGame;
+import structural.decorator_pattern.FacebookDecorator;
+import structural.decorator_pattern.INotifier;
+import structural.decorator_pattern.Notifier;
+import structural.decorator_pattern.WhatsappDecorator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +85,7 @@ public class Main {
         System.out.println("[16] - Adapter");
         System.out.println("[17] - Bridge");
         System.out.println("[18] - Composite");
+        System.out.println("[19] - Decorator");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -141,6 +146,9 @@ public class Main {
                 break;
             case 18:
                 composite();
+                break;
+            case 19:
+                decorator();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -463,5 +471,19 @@ public class Main {
         );
 
         System.out.println(entregaService.calcularPrecioPedido());
+    }
+
+    public static void decorator() {
+        /**
+         * - Asigna comportamientos adicionales a un objeto en tiempo de ejecuccion sin romper el codigo ya utilizado
+         * - Cada comportamiento es aislado por una clase permitiendo adicionar nuevos decoradores
+         */
+
+        INotifier notificarTodos = new FacebookDecorator(new WhatsappDecorator(new Notifier("Marcelo")));
+        notificarTodos.enviar("Hello World");
+
+        System.out.println("==============================");
+        INotifier notificarFacebookEmail = new FacebookDecorator(new Notifier("Marcelo"));
+        notificarFacebookEmail.enviar("Hello World Again");
     }
 }
