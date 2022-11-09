@@ -14,6 +14,9 @@ import behavioral.observer_pattern.Evento;
 import behavioral.observer_pattern.MobileAppListener;
 import behavioral.observer_pattern.Tienda;
 import behavioral.state_pattern.Telefono;
+import behavioral.strategy_pattern.PagoService;
+import behavioral.strategy_pattern.strategy.PagoPaypalStrategy;
+import behavioral.strategy_pattern.strategy.PagoTarjetaCreditoStrategy;
 import behavioral.template_method_pattern.BaseGameLoader;
 import behavioral.template_method_pattern.DiabloLoader;
 import behavioral.template_method_pattern.WorldOfWarcraftLoader;
@@ -55,6 +58,7 @@ public class Main {
         System.out.println("[10] - Memento");
         System.out.println("[11] - Observer");
         System.out.println("[12] - State");
+        System.out.println("[13] - Strategy");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -97,6 +101,9 @@ public class Main {
                 break;
             case 12:
                 state();
+                break;
+            case 13:
+                strategy();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -300,5 +307,20 @@ public class Main {
         System.out.println(telefono.clickPower());
         System.out.println(telefono.clickPower());
         System.out.println(telefono.clickHome());
+    }
+
+    public static void strategy(){
+        /**
+         * Aislamiento de estrategias separadas por clases que pueden facilmente ser implementadas
+         */
+        PagoService pagoService = new PagoService();
+
+        pagoService.setPagoStrategy(new PagoTarjetaCreditoStrategy());
+        pagoService.procesarPedido(100);
+
+        System.out.println("=========================================");
+
+        pagoService.setPagoStrategy(new PagoPaypalStrategy());
+        pagoService.procesarPedido(100);
     }
 }
