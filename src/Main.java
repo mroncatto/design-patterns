@@ -40,6 +40,10 @@ import creational.prototype_pattern.Electronico;
 import creational.prototype_pattern.ElectronicoCache;
 import creational.prototype_pattern.Tablet;
 import creational.singleton_pattern.Reloj;
+import structural.adapter_pattern.FancyUIServiceAdapter;
+import structural.adapter_pattern.IMultiRestoApp;
+import structural.adapter_pattern.MultiRestoApp;
+import structural.adapter_pattern.XmlData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +69,7 @@ public class Main {
         System.out.println("[13] - Strategy");
         System.out.println("[14] - Iterator");
         System.out.println("[15] - Visitor");
+        System.out.println("[16] - Adapter");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -116,6 +121,9 @@ public class Main {
                 break;
             case 15:
                 visitor();
+                break;
+            case 16:
+                adapter();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -378,5 +386,28 @@ public class Main {
 
         MensajeAseguradosVisitor visitor = new MensajeAseguradosVisitor();
         visitor.enviarCorreoAsegurados(clientes);
+    }
+
+    public static void adapter() {
+        /**
+         * - Utiliza herencia y composicion para habilitar objectos con interface incompatibles para
+         * colaborar entre ellos
+         * - Una clase de camada que sirve como un traductor
+         * - La adaptacion es separada y permite introducir nuevos adaptadores sin romper el codigo existente
+         */
+
+        XmlData myData = new XmlData();
+
+        // Old UI
+        IMultiRestoApp multiRestoApp = new MultiRestoApp();
+        multiRestoApp.mostrarMenus(myData);
+        multiRestoApp.mostrarRecomedaciones(myData);
+
+        System.out.println("==========================================");
+
+        // New UI
+        IMultiRestoApp adapter = new FancyUIServiceAdapter();
+        adapter.mostrarMenus(myData);
+        adapter.mostrarRecomedaciones(myData);
     }
 }
