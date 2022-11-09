@@ -1,0 +1,2 @@
+# <center> Iterator </center>
+- Su utilidad es proporcionar acceso secuencial a un número de elementos presentes dentro de un objeto de colección sin realizar ningún intercambio de información relevante.

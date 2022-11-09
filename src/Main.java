@@ -7,6 +7,8 @@ import behavioral.command_pattern.commands.AbrirCerrarCortinaCommand;
 import behavioral.command_pattern.commands.AccionarLamparaCommand;
 import behavioral.command_pattern.components.invoker.Piso;
 import behavioral.command_pattern.components.invoker.Habitacion;
+import behavioral.iterator_pattern.PrimerIterador;
+import behavioral.iterator_pattern.Vertice;
 import behavioral.mediator_pattern.Dialog;
 import behavioral.memento_pattern.Editor;
 import behavioral.observer_pattern.EmailMsgListener;
@@ -59,6 +61,7 @@ public class Main {
         System.out.println("[11] - Observer");
         System.out.println("[12] - State");
         System.out.println("[13] - Strategy");
+        System.out.println("[14] - Iterator");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -104,6 +107,9 @@ public class Main {
                 break;
             case 13:
                 strategy();
+                break;
+            case 14:
+                iterator();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -309,7 +315,7 @@ public class Main {
         System.out.println(telefono.clickHome());
     }
 
-    public static void strategy(){
+    public static void strategy() {
         /**
          * Aislamiento de estrategias separadas por clases que pueden facilmente ser implementadas
          */
@@ -323,4 +329,32 @@ public class Main {
         pagoService.setPagoStrategy(new PagoPaypalStrategy());
         pagoService.procesarPedido(100);
     }
+
+    public static void iterator() {
+        /**
+         * - Atraviesa los elementos de una colección sin exponer su representación subyacente.
+         * - Encapsula los detalles de estructuras de datos complejas al exponer un método simple para acceder a los elementos de la colección
+         */
+
+        Vertice<Integer> v0 = new Vertice<>(0);
+        Vertice<Integer> v1 = new Vertice<>(1);
+        Vertice<Integer> v2 = new Vertice<>(2);
+        Vertice<Integer> v3 = new Vertice<>(3);
+        Vertice<Integer> v4 = new Vertice<>(4);
+        Vertice<Integer> v5 = new Vertice<>(5);
+        Vertice<Integer> v6 = new Vertice<>(6);
+
+        v0.setVecinos(List.of(v1, v5, v6));
+        v1.setVecinos(List.of(v3, v4, v5));
+        v4.setVecinos(List.of(v2, v6));
+        v6.setVecinos(List.of(v0));
+
+        PrimerIterador<Integer> dfs = new PrimerIterador<>(v0);
+        while (dfs.tieneProximo()){
+            System.out.println(dfs.getProximo());
+        }
+
+
+    }
+
 }
