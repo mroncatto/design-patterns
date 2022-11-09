@@ -13,6 +13,7 @@ import behavioral.observer_pattern.EmailMsgListener;
 import behavioral.observer_pattern.Evento;
 import behavioral.observer_pattern.MobileAppListener;
 import behavioral.observer_pattern.Tienda;
+import behavioral.state_pattern.Telefono;
 import behavioral.template_method_pattern.BaseGameLoader;
 import behavioral.template_method_pattern.DiabloLoader;
 import behavioral.template_method_pattern.WorldOfWarcraftLoader;
@@ -53,6 +54,7 @@ public class Main {
         System.out.println("[9] - Mediator");
         System.out.println("[10] - Memento");
         System.out.println("[11] - Observer");
+        System.out.println("[12] - State");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -93,6 +95,9 @@ public class Main {
             case 11:
                 observer();
                 break;
+            case 12:
+                state();
+                break;
             default:
                 System.out.println("Opcion invalida!");
         }
@@ -107,7 +112,7 @@ public class Main {
         Reloj r3 = Reloj.getInstancia();
     }
 
-    private static void factoryMethod(){
+    private static void factoryMethod() {
         /**
          * Un sistema de restaurante necesita procesar pedidos donde pueden optar por 2 tipos de sandwich
          */
@@ -118,7 +123,7 @@ public class Main {
         Sandwich sandwichVegano = restauranteVegano.pedidoSandwich();
     }
 
-    public static void abstractFactory(){
+    public static void abstractFactory() {
 
         /**
          * Ejemplo: Un sistema de industria necesita procesar fabricacion de diferentes tipos de avioes y helicopteros
@@ -156,7 +161,7 @@ public class Main {
         System.out.println("El auto 2 es un " + car2.getMarca() + ", modelo " + car2.getModelo() + ", color " + car2.getColor());
     }
 
-    public static void prototype(){
+    public static void prototype() {
         /**
          * Copia de objetos sin depender de la clase
          */
@@ -166,7 +171,7 @@ public class Main {
         );
 
         List<Electronico> copyList = new ArrayList<>();
-        for(Electronico electronico : electronicos){
+        for (Electronico electronico : electronicos) {
             copyList.add(electronico.clone());
         }
 
@@ -178,7 +183,7 @@ public class Main {
         System.out.println(registro.get("comp_marca comp_modelo"));
     }
 
-    public static void chainOfResponsability(){
+    public static void chainOfResponsability() {
         /**
          * Manejo de una lista de reglas para un login donde cada regla se concentra en un handler proprio
          */
@@ -192,7 +197,7 @@ public class Main {
         service.logIn("admin", "admin_password");
     }
 
-    public static void command(){
+    public static void command() {
         /**
          * Ejecuta llamada de metodos en objetos standalone de forma escalable
          */
@@ -210,7 +215,7 @@ public class Main {
 
     }
 
-    public static void templateMethod(){
+    public static void templateMethod() {
         /**
          * Mantiene una base de estructura para una serie de metodos individuales que se ejecutan en orden
          * y pueden ser implementado manteniendo un orden evitando duplicar codigo
@@ -224,7 +229,7 @@ public class Main {
         diabloLoader.load();
     }
 
-    public static void mediator(){
+    public static void mediator() {
         /**
          * Clases desacopladas con comunicacion indirecta utilizando un mediador
          * que permite reutilizar un componente en un app diferente
@@ -238,7 +243,7 @@ public class Main {
         dialog.simulateForgotPassClicked();
     }
 
-    public static void memento(){
+    public static void memento() {
         /**
          * Salvar y restaurar el estado de un objeto sin revelar detalles de implementacion
          * Delegar a criacao de copia de estado do objeto para o proprio objeto
@@ -260,7 +265,7 @@ public class Main {
         editor.imprimirTexto();
     }
 
-    public static void observer(){
+    public static void observer() {
         /**
          * Subscreverse a listas en base a eventos de forma dinamica y escalable
          */
@@ -279,5 +284,21 @@ public class Main {
 
         tienda.getService().unsuscribe(Evento.VENTAS, new EmailMsgListener("marcelo@live.com"));
         tienda.promocionVenta();
+    }
+
+    public static void state() {
+        /**
+         * Permite alterar el estado interno de un objeto separando la logica
+         * delegando el comportamiento por clases organizadas de forma separadas
+         */
+        Telefono telefono = new Telefono();
+        System.out.println(telefono.clickPower());
+        System.out.println(telefono.clickPower());
+        System.out.println(telefono.clickHome());
+        System.out.println(telefono.clickHome());
+        System.out.println(telefono.clickHome());
+        System.out.println(telefono.clickPower());
+        System.out.println(telefono.clickPower());
+        System.out.println(telefono.clickHome());
     }
 }
