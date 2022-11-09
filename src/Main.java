@@ -9,6 +9,10 @@ import behavioral.command_pattern.components.invoker.Piso;
 import behavioral.command_pattern.components.invoker.Habitacion;
 import behavioral.mediator_pattern.Dialog;
 import behavioral.memento_pattern.Editor;
+import behavioral.observer_pattern.EmailMsgListener;
+import behavioral.observer_pattern.Evento;
+import behavioral.observer_pattern.MobileAppListener;
+import behavioral.observer_pattern.Tienda;
 import behavioral.template_method_pattern.BaseGameLoader;
 import behavioral.template_method_pattern.DiabloLoader;
 import behavioral.template_method_pattern.WorldOfWarcraftLoader;
@@ -48,6 +52,7 @@ public class Main {
         System.out.println("[8] - Template Method");
         System.out.println("[9] - Mediator");
         System.out.println("[10] - Memento");
+        System.out.println("[11] - Observer");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -84,6 +89,9 @@ public class Main {
                 break;
             case 10:
                 memento();
+                break;
+            case 11:
+                observer();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -250,5 +258,26 @@ public class Main {
         editor.imprimirTexto();
         editor.deshacer();
         editor.imprimirTexto();
+    }
+
+    public static void observer(){
+        /**
+         * Subscreverse a listas en base a eventos de forma dinamica y escalable
+         */
+        Tienda tienda = new Tienda();
+        tienda.getService().subscribe(Evento.NUEVO_ITEM, new EmailMsgListener("marcelo@live.com"));
+        tienda.getService().subscribe(Evento.VENTAS, new EmailMsgListener("marcelo@live.com"));
+        tienda.getService().subscribe(Evento.VENTAS, new EmailMsgListener("roncatto@live.com"));
+        tienda.getService().subscribe(Evento.NUEVO_ITEM, new MobileAppListener("marcelornt"));
+        tienda.nuevaPromocionItem();
+
+        System.out.println("================================================");
+
+        tienda.promocionVenta();
+
+        System.out.println("==================================================");
+
+        tienda.getService().unsuscribe(Evento.VENTAS, new EmailMsgListener("marcelo@live.com"));
+        tienda.promocionVenta();
     }
 }
