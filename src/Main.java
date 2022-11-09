@@ -22,6 +22,8 @@ import behavioral.strategy_pattern.strategy.PagoTarjetaCreditoStrategy;
 import behavioral.template_method_pattern.BaseGameLoader;
 import behavioral.template_method_pattern.DiabloLoader;
 import behavioral.template_method_pattern.WorldOfWarcraftLoader;
+import behavioral.visitor_pattern.MensajeAseguradosVisitor;
+import behavioral.visitor_pattern.model.*;
 import creational.abstract_factory_pattern.abstract_factory.Compania;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteAirbus;
 import creational.abstract_factory_pattern.concrete_factory.FabricanteBoeing;
@@ -62,6 +64,7 @@ public class Main {
         System.out.println("[12] - State");
         System.out.println("[13] - Strategy");
         System.out.println("[14] - Iterator");
+        System.out.println("[15] - Visitor");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -110,6 +113,9 @@ public class Main {
                 break;
             case 14:
                 iterator();
+                break;
+            case 15:
+                visitor();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -350,11 +356,27 @@ public class Main {
         v6.setVecinos(List.of(v0));
 
         PrimerIterador<Integer> dfs = new PrimerIterador<>(v0);
-        while (dfs.tieneProximo()){
+        while (dfs.tieneProximo()) {
             System.out.println(dfs.getProximo());
         }
 
 
     }
 
+    public static void visitor() {
+        /**
+         * - Aislamiento de comportamientos de objetos con cada operador y operando en la misma clase
+         * - Clases focadas en su trabajo principal respetando la single responsability
+         * - Visitors pueden intercambiarse por clientes en tiempo de ejecuccion
+         */
+        List<Cliente> clientes = List.of(
+                new Banco("Nombre Banco", "Direccion Banco", "00 000-0000", 5),
+                new Residente("Nombre Residente", "Direccion Resident", "00 000-0000", "medico"),
+                new Empresa("Nombre Empresa", "Direccion Empresa", "00 000-0000", 50),
+                new Cafeteria("Nombre cafeteria", "Direccion Cafeteria", "00 000-0000", false)
+        );
+
+        MensajeAseguradosVisitor visitor = new MensajeAseguradosVisitor();
+        visitor.enviarCorreoAsegurados(clientes);
+    }
 }
