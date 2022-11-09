@@ -44,6 +44,11 @@ import structural.adapter_pattern.FancyUIServiceAdapter;
 import structural.adapter_pattern.IMultiRestoApp;
 import structural.adapter_pattern.MultiRestoApp;
 import structural.adapter_pattern.XmlData;
+import structural.bridge_pattern.abstractions.Pizzeria;
+import structural.bridge_pattern.abstractions.PizzeriaAmericana;
+import structural.bridge_pattern.abstractions.PizzeriaItaliana;
+import structural.bridge_pattern.implementations.PizzaPepperoni;
+import structural.bridge_pattern.implementations.PizzaVegana;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +75,7 @@ public class Main {
         System.out.println("[14] - Iterator");
         System.out.println("[15] - Visitor");
         System.out.println("[16] - Adapter");
+        System.out.println("[17] - Bridge");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -124,6 +130,9 @@ public class Main {
                 break;
             case 16:
                 adapter();
+                break;
+            case 17:
+                bridge();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -409,5 +418,18 @@ public class Main {
         IMultiRestoApp adapter = new FancyUIServiceAdapter();
         adapter.mostrarMenus(myData);
         adapter.mostrarRecomedaciones(myData);
+    }
+
+    public static void bridge() {
+        /**
+         * Divide y organiza una unica clase con multiples variantes de funcionalidades en 2 hierarquias, abstraccion y implementacion
+         */
+        Pizzeria pizzeriaAmericana = new PizzeriaAmericana(new PizzaPepperoni());
+        pizzeriaAmericana.deliver();
+
+        System.out.println("=========================================");
+
+        Pizzeria pizzeriaItaliana = new PizzeriaItaliana(new PizzaVegana());
+        pizzeriaItaliana.deliver();
     }
 }
