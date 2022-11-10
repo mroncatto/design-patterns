@@ -57,6 +57,7 @@ import structural.decorator_pattern.FacebookDecorator;
 import structural.decorator_pattern.INotifier;
 import structural.decorator_pattern.Notifier;
 import structural.decorator_pattern.WhatsappDecorator;
+import structural.facade_pattern.ComprarCryptoFacade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,7 @@ public class Main {
         System.out.println("[17] - Bridge");
         System.out.println("[18] - Composite");
         System.out.println("[19] - Decorator");
+        System.out.println("[20] - Facade");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -149,6 +151,9 @@ public class Main {
                 break;
             case 19:
                 decorator();
+                break;
+            case 20:
+                facade();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -485,5 +490,14 @@ public class Main {
         System.out.println("==============================");
         INotifier notificarFacebookEmail = new FacebookDecorator(new Notifier("Marcelo"));
         notificarFacebookEmail.enviar("Hello World Again");
+    }
+
+    public static void facade() {
+        /**
+         * Define puntos de entrada para cada nivel de subsistema, desacoplando, centralizando y
+         * forzando trabajar por medio de una fachada (facade)
+         */
+        ComprarCryptoFacade comprarCryto = new ComprarCryptoFacade();
+        comprarCryto.buyCryptoCurrency(100, "BTC");
     }
 }
