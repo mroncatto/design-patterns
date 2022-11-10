@@ -59,6 +59,10 @@ import structural.decorator_pattern.Notifier;
 import structural.decorator_pattern.WhatsappDecorator;
 import structural.facade_pattern.ComprarCryptoFacade;
 import structural.flyweight_pattern.Libraria;
+import structural.proxy_pattern.internet.Internet;
+import structural.proxy_pattern.internet.ProxyInternet;
+import structural.proxy_pattern.video.ProxyVideoDownloader;
+import structural.proxy_pattern.video.VideoDownloader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +71,7 @@ import java.util.Scanner;
 
 public class Main {
 
+    // variables de flyweight
     private static final int TIPO_LIBROS = 2;
     private static final int LIBROS_PARA_AGREGAR = 10_000_000;
 
@@ -89,12 +94,14 @@ public class Main {
         System.out.println("[13] - Strategy");
         System.out.println("[14] - Iterator");
         System.out.println("[15] - Visitor");
+        System.out.println("\n ======================= Patrones estructurales =========================== ");
         System.out.println("[16] - Adapter");
         System.out.println("[17] - Bridge");
         System.out.println("[18] - Composite");
         System.out.println("[19] - Decorator");
         System.out.println("[20] - Facade");
         System.out.println("[21] - Flyweight");
+        System.out.println("[22] - Proxy");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -164,6 +171,9 @@ public class Main {
                 break;
             case 21:
                 flyweight();
+                break;
+            case 22:
+                proxy();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -518,7 +528,7 @@ public class Main {
          */
 
         Libraria libraria = new Libraria();
-        for(int i = 0; i < LIBROS_PARA_AGREGAR / TIPO_LIBROS; i++) {
+        for (int i = 0; i < LIBROS_PARA_AGREGAR / TIPO_LIBROS; i++) {
             libraria.librariaLibro(getRandomName(), getRandomPrice(), "Accion", "MD", "Version Limitada");
             libraria.librariaLibro(getRandomName(), getRandomPrice(), "Fantasia", "LF", "-");
         }
@@ -532,8 +542,28 @@ public class Main {
         System.out.println("Total: " + ((LIBROS_PARA_AGREGAR * 20 + TIPO_LIBROS * 30) / 1024 / 1024) + "MB (instead of " + ((LIBROS_PARA_AGREGAR * 50) / 1024 / 1024) + "MB)");
     }
 
+    public static void proxy() {
+        /**
+         * Controla el acceso a un objeto en particular realizando algo antes o después de que la solicitud llegue a ese objeto
+         */
+        Internet internet = new ProxyInternet();
+        internet.connectTo("google.com");
+        internet.connectTo("bloqueado.com");
+
+        System.out.println("==========================================");
+
+        VideoDownloader videoDownloader = new ProxyVideoDownloader();
+        videoDownloader.getVideo("memes");
+        videoDownloader.getVideo("memes");
+        videoDownloader.getVideo("F1");
+        videoDownloader.getVideo("F1");
+        videoDownloader.getVideo("memes");
+    }
 
 
+
+
+    // Clases de flyweight
     private static String getRandomName() {
         List<String> books = List.of("book_1", "book_2", "book_3", "book_4", "book_5", "book_6", "book_7", "book_8", "book_9", "book_10");
         return books.get(new Random().nextInt(books.size()));
