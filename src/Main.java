@@ -58,12 +58,18 @@ import structural.decorator_pattern.INotifier;
 import structural.decorator_pattern.Notifier;
 import structural.decorator_pattern.WhatsappDecorator;
 import structural.facade_pattern.ComprarCryptoFacade;
+import structural.flyweight_pattern.Libraria;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+
+    private static final int TIPO_LIBROS = 2;
+    private static final int LIBROS_PARA_AGREGAR = 10_000_000;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("======================= Patrones creacionales =========================== ");
@@ -88,6 +94,7 @@ public class Main {
         System.out.println("[18] - Composite");
         System.out.println("[19] - Decorator");
         System.out.println("[20] - Facade");
+        System.out.println("[21] - Flyweight");
         System.out.println("\n ========================================================================== ");
         System.out.print("\n Ingresa una opcion: ");
 
@@ -154,6 +161,9 @@ public class Main {
                 break;
             case 20:
                 facade();
+                break;
+            case 21:
+                flyweight();
                 break;
             default:
                 System.out.println("Opcion invalida!");
@@ -499,5 +509,37 @@ public class Main {
          */
         ComprarCryptoFacade comprarCryto = new ComprarCryptoFacade();
         comprarCryto.buyCryptoCurrency(100, "BTC");
+    }
+
+    public static void flyweight() {
+        /**
+         * Debe ser utilizado apenas cuando un problema debe soportar grandes cantidades de objetos a fin
+         * de reducir el consumo de RAM compartiendo algunos datos iniciales del objeto
+         */
+
+        Libraria libraria = new Libraria();
+        for(int i = 0; i < LIBROS_PARA_AGREGAR / TIPO_LIBROS; i++) {
+            libraria.librariaLibro(getRandomName(), getRandomPrice(), "Accion", "MD", "Version Limitada");
+            libraria.librariaLibro(getRandomName(), getRandomPrice(), "Fantasia", "LF", "-");
+        }
+
+        // libraria.mostrarLibros();
+        System.out.println(LIBROS_PARA_AGREGAR + " Libros agregados");
+        System.out.println("==========================================");
+        System.out.println("Memory Usage: ");
+        System.out.println("Book Size (20 bytes) * " + LIBROS_PARA_AGREGAR + " + BookTypes Size (30 bytes) * " + TIPO_LIBROS + "");
+        System.out.println("==========================================");
+        System.out.println("Total: " + ((LIBROS_PARA_AGREGAR * 20 + TIPO_LIBROS * 30) / 1024 / 1024) + "MB (instead of " + ((LIBROS_PARA_AGREGAR * 50) / 1024 / 1024) + "MB)");
+    }
+
+
+
+    private static String getRandomName() {
+        List<String> books = List.of("book_1", "book_2", "book_3", "book_4", "book_5", "book_6", "book_7", "book_8", "book_9", "book_10");
+        return books.get(new Random().nextInt(books.size()));
+    }
+
+    private static String getRandomPrice() {
+        return String.valueOf(new Random().nextDouble(10, 200));
     }
 }
