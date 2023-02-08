@@ -32,6 +32,6 @@ Los patrones de diseño más utilizados se clasifican en tres categorías princi
   - [Memento](https://github.com/mroncatto/design-patterns/tree/main/src/behavioral/memento_pattern)
   - [Observer](https://github.com/mroncatto/design-patterns/tree/main/src/behavioral/observer_pattern)
   - [State](https://github.com/mroncatto/design-patterns/tree/main/src/behavioral/state_pattern)
-  - [Strategy]()
+  - [Strategy](https://github.com/mroncatto/design-patterns/tree/main/src/behavioral/strategy_pattern)
   - [Template method](https://github.com/mroncatto/design-patterns/tree/main/src/behavioral/template_method_pattern)
   - [Visitor](https://github.com/mroncatto/design-patterns/tree/main/src/behavioral/visitor_pattern)
