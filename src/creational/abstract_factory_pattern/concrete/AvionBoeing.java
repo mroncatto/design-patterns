@@ -6,6 +6,8 @@ public class AvionBoeing implements Avion {
 
     @Override
     public void armar() {
-
+//      Logica de negocio para armar un avion boeing
+        System.out.println("Avion fabricado!");
+        System.out.println("----------------------");
     }
 }

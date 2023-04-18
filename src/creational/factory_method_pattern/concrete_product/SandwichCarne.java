@@ -5,7 +5,8 @@ import creational.factory_method_pattern.product.Sandwich;
 public class SandwichCarne implements Sandwich {
     @Override
     public void preparar() {
-        System.out.println("Preparando Sandwich de carne");
+        // Logica de negocio para preparar un sandwich de carne
+        System.out.println("Preparando un sandwich de carne...");
     }
 }
 

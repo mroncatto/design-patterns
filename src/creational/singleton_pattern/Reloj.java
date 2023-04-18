@@ -6,11 +6,17 @@ public class Reloj extends Thread {
 
     private static Reloj reloj;
 
-    // Constructor privado por que se usa el patron Singleton
-    private Reloj() {
+    // Constructor debe ser privado
+    Reloj() {
     }
 
-    // Inicializa una sola vez el reloj
+    // Obtiene una unica instancia del gestor de geozonas
+    public static Reloj getInstancia() {
+        createInstance();
+        return reloj;
+    }
+
+    // Sincronizacion de thread
     private synchronized static void createInstance() {
         if (reloj == null) {
             reloj = new Reloj();
@@ -18,20 +24,11 @@ public class Reloj extends Thread {
         }
     }
 
-    /**
-     * Obtiene la unica instancia del gestor de geozonas
-     */
-    public static Reloj getInstancia() {
-        createInstance();
-        return reloj;
-    }
-
     @Override
     public void run() {
         while (true) {
             Date hora = new Date(System.currentTimeMillis());
-            System.out.println(hora);
-
+            System.out.println(hora.getTime());
             try {
                 sleep(1000);
             } catch (InterruptedException e) {
